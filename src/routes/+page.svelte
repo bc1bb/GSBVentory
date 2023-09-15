@@ -1,3 +1,7 @@
+<script>
+	import Header from "./Header.svelte";
+</script>
+
 <svelte:head>
 	<title>GSBVentory</title>
 	<meta name="description" content="GSBVentory" />
