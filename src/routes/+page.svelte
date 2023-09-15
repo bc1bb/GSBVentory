@@ -19,7 +19,7 @@
 		</span>
 
 		to your new<br />SvelteKit app
-	</h1>
+	</h1>dqsdqsdsq
 
 	<h2>
 		try editing <strong>src/routes/+page.svelte</strong>
