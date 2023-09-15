@@ -1,16 +1,13 @@
 <script>
-	import Header from './Header.svelte';
 	import '../app.css';
+	import Footer from "./Footer.svelte";
+	import '$lib/images/bg.jpg';
 </script>
 
-<div class="">
-	<Header />
-
-	<main>
+<div class="bg-[url('bg.jpg')] flex flex-grow flex-col">
+	<main class="flex flex-grow">
 		<slot />
 	</main>
 
-	<footer>
-
-	</footer>
+	<Footer />
 </div>

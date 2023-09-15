@@ -6,10 +6,10 @@ export default {
     colors: {
       'theme': {
         'black': '#020202',
-        'darkgrey': '#503B31',
-        'lightgrey': '#705D56',
-        'coolgrey': '#9097C0',
-        'blue': '#A7BBEC'
+        'darkgrey': '#545C52',
+        'lightgrey': '#C17C74',
+        'yellow': '#FEDC97',
+        'blue': '#001D4A'
       }
     }
   },
