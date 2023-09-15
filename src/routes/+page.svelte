@@ -1,18 +1,10 @@
-
-
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
+	<title>GSBVentory</title>
+	<meta name="description" content="GSBVentory" />
 </svelte:head>
 
 <section>
-	<h1>
-		<span class="welcome">
-
-		</span>
-
-		to your new<br />SvelteKit app
-	</h1>dqsdqsdsq
+	<span class="text-9xl text-amber-50">OUI</span>
 
 	<h2>
 		try editing <strong>src/routes/+page.svelte</strong>
