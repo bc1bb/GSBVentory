@@ -26,6 +26,7 @@
 				// What in the fucking hell is this absolute fucking piece of trash
 
 				document.cookie = `token=${token}; path=/; max-age=1209600`; // 14 days
+				document.location = "/user";
 			}
 		} catch (error) {
 			console.error(error);
