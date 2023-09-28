@@ -1,5 +1,6 @@
 import {PUBLIC_BACKEND_URL} from "$env/static/public";
 import getCookie from "$lib/scripts/getCookie";
+import type User from "$lib/objs/User";
 
 export default async (cookies: string) => {
     const token = getCookie("token", cookies);
@@ -9,11 +10,11 @@ export default async (cookies: string) => {
             method: 'GET',
             headers: {
                 'Authorization': token
-            }
+            },
         });
 
-        return response.ok;
+        return await response.json() as User;
     } catch (error) {
-        return false
+        throw NotLoggedInError;
     }
 }
