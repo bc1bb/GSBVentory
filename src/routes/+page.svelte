@@ -22,7 +22,7 @@
 			});
 
 			if (response.ok) {
-				const token = JSON.parse(JSON.stringify(await response.json())).token;
+				const token = (await response.json()).token;
 				// What in the fucking hell is this absolute fucking piece of trash
 
 				document.cookie = `token=${token}; path=/; max-age=1209600`; // 14 days
