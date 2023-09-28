@@ -51,19 +51,19 @@ export default () => {
                         <table className="w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                             <thead className="bg-theme-lightgrey bg-opacity-20">
                                 <tr>
-                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Identifiant interne
                                     </th>
-                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Date d'achat
                                     </th>
-                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Constructeur
                                     </th>
-                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Modèle
                                     </th>
-                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Numéro de série
                                     </th>
                                     <th scope="col" className="p-4">
@@ -71,7 +71,7 @@ export default () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y w-full">
+                            <tbody className="divide-y">
                                 {data}
                             </tbody>
                     </table>
