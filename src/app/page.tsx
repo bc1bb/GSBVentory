@@ -5,7 +5,6 @@ import LoginResponse from "@/objs/LoginResponse";
 export default function Home() {
   const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  console.log(PUBLIC_BACKEND_URL);
   const handleSubmit = async (event: Event) => {
     event.preventDefault();
 
@@ -27,10 +26,11 @@ export default function Home() {
 
       if (response.ok) {
         const token = (await response.json() as LoginResponse).token;
-        // What in the fucking hell is this absolute fucking piece of trash
 
         document.cookie = `token=${token}; path=/; max-age=1209600`; // 14 days
         document.location = "/dash";
+      } else {
+        document.location.reload();
       }
     } catch (error) {
       console.error(error);
