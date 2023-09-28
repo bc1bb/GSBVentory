@@ -7,13 +7,13 @@ interface HardwareProps {
 export default (props: HardwareProps) => {
     return (
         <tr>
-            <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">{props.hardware.internalId}</td>
-            <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap">{props.hardware.buyDate.toLocaleString().split("T")[0]}</td>
-            <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap">{props.hardware.manufacturer}</td>
-            <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap">{props.hardware.model}</td>
-            <td className="py-4 px-6 text-sm font-medium text-gray-500 whitespace-nowrap">{props.hardware.serialNumber}</td>
+            <td className="py-4 px-6 text-sm font-medium text-theme-darkgrey whitespace-nowrap">{props.hardware.internalId}</td>
+            <td className="py-4 px-6 text-sm font-medium text-theme-blue whitespace-nowrap">{props.hardware.buyDate.toLocaleString().split("T")[0]}</td>
+            <td className="py-4 px-6 text-sm font-medium text-theme-blue whitespace-nowrap">{props.hardware.manufacturer}</td>
+            <td className="py-4 px-6 text-sm font-medium text-theme-blue whitespace-nowrap">{props.hardware.model}</td>
+            <td className="py-4 px-6 text-sm font-medium text-theme-blue whitespace-nowrap">{props.hardware.serialNumber}</td>
             <td className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap">
-                <a href={`?edit=${props.hardware.internalId}`} className="text-blue-600 hover:underline">Edit</a>
+                <a href={`?edit=${props.hardware.internalId}`} className="p-2 rounded-sm border-2 bg-theme-blue bg-opacity-20 border-theme-black text-theme-yellow hover:underline">Edit</a>
             </td>
         </tr>
     )

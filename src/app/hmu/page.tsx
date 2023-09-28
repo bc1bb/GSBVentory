@@ -35,7 +35,7 @@ export default () => {
                 }
             }
 
-            setData(<div>{content}</div>);
+            setData(<tbody className="divide-y divide-black">{content}</tbody>);
         }
 
         fetchData().catch(console.error);
@@ -48,7 +48,7 @@ export default () => {
             <div className="container p-[5vh]">
                 <div className="flex flex-col">
                     <div className="h-[90vh] overflow-y-scroll w-full align-middle">
-                        <table className="w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+                        <table className="table-fixed w-full divide-y divide-gray-700">
                             <thead className="bg-theme-lightgrey bg-opacity-20">
                                 <tr>
                                     <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
@@ -71,9 +71,7 @@ export default () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y">
-                                {data}
-                            </tbody>
+                            {data}
                     </table>
                 </div>
             </div>
