@@ -21,11 +21,13 @@
 
 <div class="flex h-screen flex-col justify-between border-e">
     <div class="px-4 py-6">
-    <span class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600">
-      <img src={Gsb} alt="Gsb">
-    </span>
+        <span class="flex h-10">
+            <div class="w-1/3"></div>
+            <img src={Gsb} alt="Gsb" class="w-1/3">
+            <div class="w-1/3"></div>
+        </span>
 
-        <ul class="mt-6 space-y-1">
+        <ul class="mt-3 space-y-1">
             <li>
                 <a href="/user" class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
                     Dashboard
