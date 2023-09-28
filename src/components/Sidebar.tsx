@@ -6,7 +6,6 @@ import fetchUser from "@/scripts/fetchUser";
 import Link from "next/link";
 
 export default () => {
-    const [userType, setUserType] = useState(-1); // initiating int (backend will never deliver negative userType)
     const [userName, setUserName] = useState("");
     const [hardwareLinks, setHardwareLinks] = useState(<div></div>);
     const [umuLinks, setUmuLinks] = useState(<div></div>);
@@ -17,24 +16,23 @@ export default () => {
             (isLogged: boolean) => {
                 if (!isLogged) document.location.href = "/";
             }
-        );
+        ).catch(console.error);
         fetchUser(document.cookie).then(
             (user: User) => {
-                setUserType(user.userType);
                 setUserName(user.username);
-            }
-        );
 
-        // If user is allowed to manage users
-        if (userType>=2) {
-            setUmuLinks(
-                <li>
-                    <a href="/umu" className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
-                        User Management
-                    </a>
-                </li>
-            );
-        }
+                // If user is allowed to manage users
+                if (user.userType >= 2) {
+                    setUmuLinks(
+                        <li>
+                            <Link href="/umu" className="rounded-lg px-4 py-2 text-sm font-medium text-gray-500">
+                                User Management
+                            </Link>
+                        </li>
+                    );
+                }
+            }
+        ).catch(console.error);
 
         fetchHardwareTypes(document.cookie).then(
             (hardwareTypes) => {
@@ -42,7 +40,7 @@ export default () => {
                 for (const hardwareType of hardwareTypes) {
                     content.push(
                         <li>
-                            <Link href={`/hmu?${hardwareType.name}`} className="capitalize px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                            <Link href={`/hmu?${hardwareType.name}`} className="capitalize px-4 py-2 text-sm font-medium text-gray-500">
                                 {hardwareType.name}
                             </Link>
                         </li>
@@ -51,7 +49,7 @@ export default () => {
 
                 setHardwareLinks(<div>{content}</div>);
             }
-        )
+        ).catch(console.error);
     }, [aigris]);
     
     return (
@@ -65,15 +63,15 @@ export default () => {
 			</span>
                     <ul className="mt-3 space-y-1">
                         <li>
-                            <a href="/user" className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700">
+                            <a href="/user" className="px-4 py-2 text-sm font-medium text-gray-500">
                                 Dashboard
                             </a>
                         </li>
                         <li>
                             <details className="group [&_summary::-webkit-details-marker]:hidden">
-                                <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                <summary className="flex cursor-pointer items-center justify-between px-4 py-2">
                                     <Link href="/hmu">
-                                        <span className="text-sm font-medium"> Hardware </span>
+                                        <span className="text-sm font-medium text-gray-500"> Hardware </span>
                                     </Link>
                                     <span className="shrink-0 transition duration-300 group-open:-rotate-180">
 								<svg
@@ -85,17 +83,18 @@ export default () => {
                                 <ul className="mt-2 space-y-1 px-2">
                                     {hardwareLinks}
                                     <li>
-                                        <Link href="/hwtype" className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                        <Link href="/hwtype" className="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500">
                                             Hardware Types
                                         </Link>
                                     </li>
                                 </ul>
                             </details>
                         </li>
+                        {umuLinks}
                     </ul>
                 </div>
                 <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
-                    <div className="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
+                    <div className="flex items-center gap-2 p-4">
                         <img alt="User Profile" src={`https://ui-avatars.com/api/?name=${userName}&rounded=true&background=random`} className="h-10 w-10 rounded-full object-cover"/>
                         <div>
                             <p className="text-xs">
