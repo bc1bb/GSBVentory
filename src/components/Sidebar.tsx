@@ -40,7 +40,7 @@ export default () => {
                 for (const hardwareType of hardwareTypes) {
                     content.push(
                         <li>
-                            <Link href={`/hmu?${hardwareType.name}`} className="capitalize px-4 py-2 text-sm font-medium text-gray-500">
+                            <Link href={`/hmu?type=${hardwareType.name}`} className="capitalize px-4 py-2 text-sm font-medium text-gray-500">
                                 {hardwareType.name}
                             </Link>
                         </li>
@@ -63,9 +63,9 @@ export default () => {
 			</span>
                     <ul className="mt-3 space-y-1">
                         <li>
-                            <a href="/user" className="px-4 py-2 text-sm font-medium text-gray-500">
+                            <Link href="/dash" className="px-4 py-2 text-sm font-medium text-gray-500">
                                 Dashboard
-                            </a>
+                            </Link>
                         </li>
                         <li>
                             <details className="group [&_summary::-webkit-details-marker]:hidden">
