@@ -19,7 +19,16 @@ export default async (cookies: string, type: string) => {
             },
         });
 
-        return await response.json() as Hardware[];
+        const responseJson = await response.json() as Hardware[];
+        let finalJson: Hardware[] = [];
+
+        for (const i in responseJson) {
+            if(responseJson[i].type == type) {
+                finalJson.push(responseJson[i]);
+            }
+        }
+
+        return finalJson as Hardware[];
     } catch (error) {
         throw error;
     }

@@ -2,10 +2,10 @@
 	import checkLogin from "$lib/scripts/checkLogin";
     import fetchUser from "$lib/scripts/fetchUser";
 	import {onMount} from "svelte";
-	import findHardware from "$lib/scripts/findHardware";
 	import fetchHardwareTypes from "$lib/scripts/fetchHardwareTypes";
 	import type HardwareType from "$lib/objs/HardwareType";
 	import Sidebar from "$lib/components/Sidebar.svelte";
+	import findHardwareByType from "$lib/scripts/findHardwareByType";
 
 	let userType = -1; // initiating int (backend will never deliver negative userType)
 	let userName = "";
@@ -16,8 +16,8 @@
 	let hardwareTypesLen = 0;
 
 	onMount(async () => {
-		const laptopsJson = await findHardware(document.cookie, "laptop");
-		const computersJson = await findHardware(document.cookie, "tower");
+		const laptopsJson = await findHardwareByType(document.cookie, "laptop");
+		const computersJson = await findHardwareByType(document.cookie, "tower");
 		const hardwareTypesJson = await fetchHardwareTypes(document.cookie);
 
 		laptop = Object.keys(laptopsJson).length;
