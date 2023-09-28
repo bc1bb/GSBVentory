@@ -2,7 +2,7 @@ import getCookie from "./getCookie";
 import checkLogin from "./checkLogin";
 import type Hardware from "@/objs/Hardware";
 
-export default async (cookies: string) => {
+export default async (cookies: string, type: string) => {
     const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     try {
@@ -20,7 +20,16 @@ export default async (cookies: string) => {
             },
         });
 
-        return await response.json() as Hardware[];
+        const responseJson = await response.json() as Hardware[];
+        let finalJson: Hardware[] = [];
+
+        for (const i in responseJson) {
+            if(responseJson[i].type == type) {
+                finalJson.push(responseJson[i]);
+            }
+        }
+
+        return finalJson as Hardware[];
     } catch (error) {
         throw error;
     }
