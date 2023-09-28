@@ -3,7 +3,7 @@ import getCookie from "$lib/scripts/getCookie";
 import checkLogin from "$lib/scripts/checkLogin";
 import type Hardware from "$lib/objs/Hardware";
 
-export default async (cookies: string, type: string) => {
+export default async (cookies: string) => {
     try {
         await checkLogin(cookies);
     } catch {

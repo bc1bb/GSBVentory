@@ -1,11 +1,11 @@
 <script lang="ts">
-	import checkLogin from "$lib/scripts/checkLogin";
     import fetchUser from "$lib/scripts/fetchUser";
 	import {onMount} from "svelte";
 	import fetchHardwareTypes from "$lib/scripts/fetchHardwareTypes";
 	import type HardwareType from "$lib/objs/HardwareType";
 	import Sidebar from "$lib/components/Sidebar.svelte";
 	import findHardwareByType from "$lib/scripts/findHardwareByType";
+	import findHardware from "$lib/scripts/findHardware";
 
 	let userType = -1; // initiating int (backend will never deliver negative userType)
 	let userName = "";
@@ -17,10 +17,10 @@
 
 	onMount(async () => {
 		const laptopsJson = await findHardwareByType(document.cookie, "laptop");
-		const computersJson = await findHardwareByType(document.cookie, "tower");
+		const computersJson = await findHardware(document.cookie);
 		const hardwareTypesJson = await fetchHardwareTypes(document.cookie);
 
-		laptop = Object.keys(laptopsJson).length;
+		laptop = Object.keys(laptopsJson).length + 5;
 		computers = Object.keys(computersJson).length;
 		hardwareTypesLen = Object.keys(hardwareTypesJson).length;
 
@@ -53,9 +53,15 @@
 			<dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
 				<div class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
 					<dt class="order-last text-lg font-medium text-gray-500">
+						Hardware Types
+					</dt>
+					<dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">{hardwareTypesLen}</dd>
+				</div>
+
+				<div class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
+					<dt class="order-last text-lg font-medium text-gray-500">
 						Laptops
 					</dt>
-
 					<dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
 						{laptop}
 					</dd>
@@ -65,17 +71,7 @@
 					<dt class="order-last text-lg font-medium text-gray-500">
 						Computers
 					</dt>
-
 					<dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">{computers}</dd>
-				</div>
-
-
-				<div class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
-					<dt class="order-last text-lg font-medium text-gray-500">
-						Hardware Types
-					</dt>
-
-					<dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">{hardwareTypesLen}</dd>
 				</div>
 			</dl>
 		</div>

@@ -49,7 +49,7 @@
                         {#await fetchHardwareTypes(document.cookie) then hardwareTypesJson}
                             {#each hardwareTypesJson as i}
                                 <li>
-                                    <a href="/hmu?{i.name}" class="capitalize px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
+                                    <a href="/hmu?type={i.name}" class="capitalize px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700">
                                         {i.name}
                                     </a>
                                 </li>
@@ -77,7 +77,7 @@
         <div class="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
             <img alt="User Profile" src="https://ui-avatars.com/api/?name={userName}&rounded=true&background=random" class="h-10 w-10 rounded-full object-cover"/>
             <div>
-                <p class="text-xs">
+                <p class="text-xs capitalize">
                     <strong class="block font-medium">{userName}</strong>
                 </p>
             </div>
