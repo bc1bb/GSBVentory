@@ -1,7 +1,8 @@
-import {PUBLIC_BACKEND_URL} from "$env/static/public";
-import getCookie from "$lib/scripts/getCookie";
+import getCookie from "./getCookie";
 
-export default async (cookies: string) => {
+const checkLogin = async (cookies: string) => {
+    const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
     const token = getCookie("token", cookies);
 
     try {
@@ -17,3 +18,5 @@ export default async (cookies: string) => {
         return false
     }
 }
+
+export default checkLogin;

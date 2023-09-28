@@ -1,4 +1,4 @@
-export default (cookieName: string, cookies: string): string => {
+export default (cookieName: string, cookies: string)  => {
     const cookiesArray = cookies.split(';');
 
     for (let i = 0; i < cookiesArray.length; i++) {

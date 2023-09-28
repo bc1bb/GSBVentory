@@ -1,9 +1,10 @@
-import {PUBLIC_BACKEND_URL} from "$env/static/public";
-import getCookie from "$lib/scripts/getCookie";
-import checkLogin from "$lib/scripts/checkLogin";
-import type Hardware from "$lib/objs/Hardware";
+import getCookie from "./getCookie";
+import checkLogin from "./checkLogin";
+import type Hardware from "@/objs/Hardware";
 
 export default async (cookies: string, type: string) => {
+    const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+
     try {
         await checkLogin(cookies);
     } catch {
