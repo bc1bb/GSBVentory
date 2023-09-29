@@ -1,6 +1,7 @@
 'use client';
 
 import LoginResponse from "@/objs/LoginResponse";
+import Image from "next/image";
 
 export default function Home() {
   const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -43,7 +44,7 @@ export default function Home() {
           <div className="border-2 border-theme-darkgrey rounded-md p-5 bg-theme-lightgrey bg-opacity-20 border-opacity-25 hover:shadow-2xl">
             <div className="flex">
               <div className="w-1/3"></div>
-              <img src="/gsb.png" alt="GSB Logo" className="flex mb-5 h-[10vh]" />
+              <Image src="/gsb.png" alt="GSB Logo" className="flex mb-5 h-[10vh]" width={318} height={213} />
                 <div className="w-1/3"></div>
             </div>
             <form className="w-full max-w-sm" onSubmit={handleSubmit}>

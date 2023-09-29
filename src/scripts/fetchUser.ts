@@ -1,7 +1,7 @@
 import getCookie from "./getCookie";
 import type User from "@/objs/User";
 
-export default async (cookies: string) => {
+const fetchUser = async (cookies: string) => {
     const token = getCookie("token", cookies);
     const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -18,3 +18,5 @@ export default async (cookies: string) => {
         throw NotLoggedInError;
     }
 }
+
+export default fetchUser;

@@ -1,6 +1,6 @@
 import getCookie from "./getCookie";
 
-export default async (cookies: string) => {
+const checkLogin = async (cookies: string) => {
     const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     const token = getCookie("token", cookies);
@@ -18,3 +18,5 @@ export default async (cookies: string) => {
         return false
     }
 }
+
+export default checkLogin;

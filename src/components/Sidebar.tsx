@@ -4,12 +4,12 @@ import fetchHardwareTypes from "@/scripts/fetchHardwareTypes";
 import checkLogin from "@/scripts/checkLogin";
 import fetchUser from "@/scripts/fetchUser";
 import Link from "next/link";
+import Image from "next/image";
 
-export default () => {
+const Sidebar = () => {
     const [userName, setUserName] = useState("");
     const [hardwareLinks, setHardwareLinks] = useState(<div></div>);
     const [umuLinks, setUmuLinks] = useState(<div></div>);
-    const [aigris] = useState();
 
     useEffect(() => {
         checkLogin(document.cookie).then(
@@ -50,14 +50,14 @@ export default () => {
                 setHardwareLinks(<div>{content}</div>);
             }
         ).catch(console.error);
-    }, [aigris]);
+    }, []);
     
     return (
         <div className="flex h-screen min-w-[12rem] flex-col justify-between border-e">
             <div className="px-4 py-6">
 		<span className="flex h-10">
 			<div className="w-1/3" />
-			<img src="/gsb.png" alt="Gsb" className="w-1/3" />
+			<Image src="/gsb.png" alt="Gsb" className="w-1/3" width={318} height={213} />
 			<div className="w-1/3" />
 		</span>
                 <ul className="mt-3 space-y-1">
@@ -94,7 +94,7 @@ export default () => {
             </div>
             <div className="sticky inset-x-0 bottom-0 border-t border-gray-100">
                 <div className="flex items-center gap-2 p-4">
-                    <img alt="User Profile" src={`https://ui-avatars.com/api/?name=${userName}&rounded=true&background=random`} className="h-10 w-10 rounded-full object-cover"/>
+                    <img alt="User Profile" src={`https://ui-avatars.com/api/?name=${userName}&rounded=true&background=random`} className="h-10 w-10 rounded-full object-cover" />
                     <div>
                         <p className="text-xs">
                             <strong className="block capitalize font-medium">{userName}</strong>
@@ -105,3 +105,5 @@ export default () => {
         </div>
     )
 }
+
+export default Sidebar;

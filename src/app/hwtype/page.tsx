@@ -1,7 +1,9 @@
 'use client';
 
-export default () => {
+const HardwareTypePage = () => {
     return (
         <div></div>
     )
 }
+
+export default HardwareTypePage;

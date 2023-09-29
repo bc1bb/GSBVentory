@@ -1,7 +1,9 @@
 'use client';
 
-export default () => {
+const Umu = () => {
     return (
         <div></div>
     )
 }
+
+export default Umu;

@@ -6,7 +6,7 @@ import Sidebar from "@/components/Sidebar";
 import {useEffect, useState} from "react";
 import findHardwareByType from "@/scripts/findHardwareByType";
 
-export default () => {
+const Dashboard = () => {
     const [laptop, setLaptop] = useState(0);
     const [computers, setComputers] = useState(0);
     const [hardwareTypesLen, setHardwareTypesLen] = useState(0);
@@ -70,3 +70,5 @@ export default () => {
             </section>
         </div>)
 }
+
+export default Dashboard;

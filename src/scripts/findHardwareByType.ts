@@ -2,7 +2,7 @@ import getCookie from "./getCookie";
 import checkLogin from "./checkLogin";
 import type Hardware from "@/objs/Hardware";
 
-export default async (cookies: string, type: string) => {
+const findHardwareByType = async (cookies: string, type: string) => {
     const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     try {
@@ -34,3 +34,5 @@ export default async (cookies: string, type: string) => {
         throw error;
     }
 }
+
+export default findHardwareByType;

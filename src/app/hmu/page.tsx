@@ -7,7 +7,7 @@ import Sidebar from "@/components/Sidebar";
 import findHardwareByType from "@/scripts/findHardwareByType";
 import HardwareTable from "@/components/HardwareTable";
 
-export default () => {
+const Hmu = () => {
     const searchParams = useSearchParams();
     const [data, setData] = useState(<div></div>);
 
@@ -55,7 +55,7 @@ export default () => {
                                         Identifiant interne
                                     </th>
                                     <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
-                                        Date d'achat
+                                        Date d&apos;achat
                                     </th>
                                     <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Constructeur
@@ -67,15 +67,17 @@ export default () => {
                                         Numéro de série
                                     </th>
                                     <th scope="col" className="p-4">
-                                        <span className="sr-only">Edit</span>
+                                        <span className="sr-only">Modifier</span>
                                     </th>
                                 </tr>
                             </thead>
                             {data}
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
     )
 }
+
+export default Hmu;
