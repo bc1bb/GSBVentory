@@ -103,7 +103,7 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
                         <div className="bg-theme-lightgrey bg-opacity-20 rounded shadow-lg p-4 px-4 md:p-8 mb-6">
                             <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                                 <div className="text-gray-600">
-                                    <p className="font-medium text-lg">Édition de matériel</p>
+                                    <p className="font-medium text-lg">Editing hardware</p>
                                     <p className="font-sm text-sm">{internalId}</p>
                                 </div>
 
@@ -115,27 +115,27 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
                                         </div>
 
                                         <div className="md:col-span-3">
-                                            <label htmlFor="end_of_warranty_date">Date de fin de garantie</label>
+                                            <label htmlFor="end_of_warranty_date">End of warranty</label>
                                             <input type="date" defaultValue={dateHtmlValue(endOfWarrantyDate)} name="end_of_warranty_date" id="end_of_warranty_date" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                                         </div>
 
                                         <div className="md:col-span-2">
-                                            <label htmlFor="buy_date">Date d&apos;achat</label>
+                                            <label htmlFor="buy_date">Date of buy</label>
                                             <input type="date" defaultValue={dateHtmlValue(buyDate)} name="buy_date" id="buy_date" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" required />
                                         </div>
 
                                         <div className="md:col-span-2">
-                                            <label htmlFor="manufacturer">Fabricant</label>
+                                            <label htmlFor="manufacturer">Manufacturer</label>
                                             <input type="text" defaultValue={manufacturer} name="manufacturer" id="manufacturer" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" required />
                                         </div>
 
                                         <div className="md:col-span-3">
-                                            <label htmlFor="model">Modèle</label>
+                                            <label htmlFor="model">Model</label>
                                             <input type="text" defaultValue={model} name="model" id="model" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" required />
                                         </div>
 
                                         <div className="md:col-span-5">
-                                            <label htmlFor="serial_number">Numéro de Série</label>
+                                            <label htmlFor="serial_number">Serial Number</label>
                                             <input type="text" defaultValue={serialNumber} name="serial_number" id="serial_number" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" required />
                                         </div>
 
