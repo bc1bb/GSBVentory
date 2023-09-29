@@ -4,7 +4,7 @@ const dateHtmlValue = (date: Date) => {
     const newDate = new Date(date);
 
     if (newDate.getFullYear() === 1970) return ""
-    else newDate.toLocaleDateString('en-CA');
+    else return newDate.toLocaleDateString('en-CA');
 }
 
 export default dateHtmlValue;
