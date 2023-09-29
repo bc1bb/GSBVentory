@@ -2,11 +2,12 @@
 
 import LoginResponse from "@/objs/LoginResponse";
 import Image from "next/image";
+import React from "react";
 
 export default function Home() {
   const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  const handleSubmit = async (event: Event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let username = (document.getElementById("username") as HTMLInputElement).value;
