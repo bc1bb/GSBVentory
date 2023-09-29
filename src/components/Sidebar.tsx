@@ -4,7 +4,6 @@ import fetchHardwareTypes from "@/scripts/fetchHardwareTypes";
 import checkLogin from "@/scripts/checkLogin";
 import fetchUser from "@/scripts/fetchUser";
 import Link from "next/link";
-import Image from "next/image";
 
 const Sidebar = () => {
     const [userName, setUserName] = useState("");
@@ -57,7 +56,7 @@ const Sidebar = () => {
             <div className="px-4 py-6">
 		<span className="flex h-10">
 			<div className="w-1/3" />
-			<Image src="/gsb.png" alt="Gsb" className="w-1/3" width={318} height={213} />
+			<img src="/gsb.png" alt="Gsb" className="w-1/3" />
 			<div className="w-1/3" />
 		</span>
                 <ul className="mt-3 space-y-1">
