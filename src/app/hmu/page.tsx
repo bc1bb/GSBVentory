@@ -6,6 +6,7 @@ import findHardware from "@/scripts/findHardware";
 import Sidebar from "@/components/Sidebar";
 import findHardwareByType from "@/scripts/findHardwareByType";
 import HardwareTable from "@/components/HardwareTable";
+import Link from "next/link";
 
 const Hmu = () => {
     const searchParams = useSearchParams();
@@ -66,8 +67,8 @@ const Hmu = () => {
                                     <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Numéro de série
                                     </th>
-                                    <th scope="col" className="p-4">
-                                        <span className="sr-only">Modifier</span>
+                                    <th scope="col" className="py-3 px-6 text-center text-xs font-medium tracking-wider text-gray-700 uppercase">
+                                        <Link href="/hmu/add" className="font-bold p-2 rounded-sm border-2 bg-theme-blue bg-opacity-20 border-theme-black text-theme-yellow hover:underline">Ajouter</Link>
                                     </th>
                                 </tr>
                             </thead>
