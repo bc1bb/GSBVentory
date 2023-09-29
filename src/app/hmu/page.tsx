@@ -10,11 +10,15 @@ import Link from "next/link";
 
 const Hmu = () => {
     const searchParams = useSearchParams();
-    const [data, setData] = useState(<div></div>);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [data, setData] = useState(<></>);
     const typeInUrl = searchParams.get('type') as string;
 
     let content: JSX.Element[] = [];
     useEffect(() => {
+        if (isLoaded) return
+        setIsLoaded(true);
+
         const fetchData = async () => {
 
             // user wants a specific type
