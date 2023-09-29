@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import getCookie from "@/scripts/getCookie";
 import fetchHardwareTypes from "@/scripts/fetchHardwareTypes";
 
-const addToHmu = () => {
+const AddToHmu = () => {
     const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
     const [typesAsOptions, setTypesAsOptions] = useState(<div></div>);
 
@@ -81,7 +81,7 @@ const addToHmu = () => {
                                         </div>
 
                                         <div className="md:col-span-2">
-                                            <label htmlFor="buy_date">Date d'achat</label>
+                                            <label htmlFor="buy_date">Date d&apos;achat</label>
                                             <input type="date" name="buy_date" id="buy_date" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" required />
                                         </div>
 
@@ -119,4 +119,4 @@ const addToHmu = () => {
     )
 }
 
-export default addToHmu;
+export default AddToHmu;
