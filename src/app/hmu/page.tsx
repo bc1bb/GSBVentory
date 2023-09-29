@@ -11,8 +11,7 @@ import Link from "next/link";
 const Hmu = () => {
     const searchParams = useSearchParams();
     const [data, setData] = useState(<div></div>);
-
-    const typeInUrl = searchParams.get('type');
+    const typeInUrl = searchParams.get('type') as string;
 
     let content: JSX.Element[] = [];
     useEffect(() => {
@@ -58,17 +57,17 @@ const Hmu = () => {
                                     <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Date d&apos;achat
                                     </th>
-                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                    <th scope="col" className="w-[10rem] py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Constructeur
                                     </th>
-                                    <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+                                    <th scope="col" className="w-[10rem] py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Modèle
                                     </th>
                                     <th scope="col" className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
                                         Numéro de série
                                     </th>
                                     <th scope="col" className="py-3 px-6 text-center text-xs font-medium tracking-wider text-gray-700 uppercase">
-                                        <Link href="/hmu/add" className="font-bold p-2 rounded-sm border-2 bg-theme-blue bg-opacity-20 border-theme-black text-theme-yellow hover:underline">Ajouter</Link>
+                                        <Link href="/hmu/new" className="font-bold p-2 rounded-sm border-2 bg-theme-blue bg-opacity-20 border-theme-black text-theme-yellow hover:underline">Ajouter</Link>
                                     </th>
                                 </tr>
                             </thead>
