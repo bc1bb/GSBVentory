@@ -6,11 +6,15 @@ import fetchUser from "@/scripts/fetchUser";
 import Link from "next/link";
 
 const Sidebar = () => {
+    const [isLoaded, setIsLoaded] = useState(false);
     const [userName, setUserName] = useState("");
     const [hardwareLinks, setHardwareLinks] = useState(<div></div>);
     const [umuLinks, setUmuLinks] = useState(<div></div>);
 
     useEffect(() => {
+        if (isLoaded) return
+        setIsLoaded(true);
+
         checkLogin(document.cookie).then(
             (isLogged: boolean) => {
                 if (!isLogged) document.location.href = "/";
@@ -49,7 +53,7 @@ const Sidebar = () => {
                 setHardwareLinks(<div>{content}</div>);
             }
         ).catch(console.error);
-    }, []);
+    });
     
     return (
         <div className="flex h-screen min-w-[12rem] flex-col justify-between border-e">
