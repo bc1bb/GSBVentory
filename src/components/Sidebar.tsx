@@ -38,7 +38,7 @@ const Sidebar = () => {
                 let content = [];
                 for (const hardwareType of hardwareTypes) {
                     content.push(
-                        <li>
+                        <li key={content.length}>
                             <Link href={`/hmu?type=${hardwareType.name}`} className="capitalize px-4 py-2 text-sm font-medium text-gray-500">
                                 {hardwareType.name}
                             </Link>
@@ -60,12 +60,12 @@ const Sidebar = () => {
 			<div className="w-1/3" />
 		</span>
                 <ul className="mt-3 space-y-1">
-                    <li>
+                    <li key={1}>
                         <Link href="/dash" className="px-4 py-2 text-sm font-medium text-gray-500">
                             Dashboard
                         </Link>
                     </li>
-                    <li>
+                    <li key={2}>
                         <details className="group [&_summary::-webkit-details-marker]:hidden">
                             <summary className="flex cursor-pointer items-center justify-between px-4 py-2">
                                 <Link href="/hmu">
