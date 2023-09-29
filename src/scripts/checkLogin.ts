@@ -5,18 +5,15 @@ const checkLogin = async (cookies: string) => {
 
     const token = getCookie("token", cookies);
 
-    try {
-        const response = await fetch(PUBLIC_BACKEND_URL + "/user", {
-            method: 'GET',
-            headers: {
-                'Authorization': token
-            }
-        });
+    const response = await fetch(PUBLIC_BACKEND_URL + "/user", {
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
+    });
 
-        return response.ok;
-    } catch (error) {
-        return false
-    }
+    if (response.ok) return true;
+    else throw NotLoggedInError;
 }
 
 export default checkLogin;
