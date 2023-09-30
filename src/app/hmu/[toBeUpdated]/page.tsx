@@ -6,6 +6,7 @@ import getCookie from "@/scripts/getCookie";
 import fetchHardwareTypes from "@/scripts/fetchHardwareTypes";
 import fetchHardware from "@/scripts/fetchHardware";
 import dateHtmlValue from "@/scripts/dateHtmlValue";
+import formatHardwareType from "@/objs/formatHardwareType";
 
 const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
     const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -15,7 +16,7 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
 
     const [internalId, setInternalId] = useState("");
     const [internalIdForm, setInternalIdForm] = useState(<></>);
-    const [type, setType] = useState("");
+    const [type, setType] = useState(0);
     const [buyDate, setBuyDate] = useState("");
     const [serialNumber, setSerialNumber] = useState("");
     const [manufacturer, setManufacturer] = useState("");
@@ -26,17 +27,18 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
     useEffect(() => {
         if (isLoaded) return; setIsLoaded(true);
 
-        // if this is 'old' hardware no need to load hardware types selector, it cannot be edited
+        // load <options> for <select> only on new hardware, old hardware will have a <input type="text" readOnly={true} ... />
         if (newHardware) {
             fetchHardwareTypes(document.cookie).then(
                 (hardwareTypes) => {
-                    let content: JSX.Element[] = [];
-
+                    let content = [ <option></option> ];
+                    let i = 1;
                     for (const hardwareType of hardwareTypes) {
-                        content.push(<option value={hardwareType.name} className="capitalize">{hardwareType.name}</option>);
+                        content.push(<option value={i} className="capitalize">{hardwareType.name}</option>);
+                        i++
                     }
 
-                    setTypesAsOptions(<select id="type" name="type" value={type} onChange={e=>setType(e.target.value)} className="capitalize h-10 border mt-1 rounded px-4 w-full bg-gray-50">{content}</select>);
+                    setTypesAsOptions(<select id="type" name="type" value={type} onChange={e => setType(parseInt(e.target.value, 10))} className="capitalize h-10 border mt-1 rounded px-4 w-full bg-gray-50">{content}</select>);
                 }
             ).catch(console.error);
 
@@ -44,19 +46,22 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
             return;
         }
 
-        // From now on only new hardware
+        // From now on only old hardware
         fetchHardware(document.cookie, params.toBeUpdated).then(
-            (hardware) => {
-                setTypesAsOptions(<input value={hardware.type} id="type" name="type" readOnly={true} className="capitalize text-gray-400 h-10 border mt-1 rounded px-4 w-full bg-gray-50" />);
-
+            async (hardware) => {
                 setSerialNumber(hardware.serialNumber);
+                setType(parseInt(hardware.type, 10));
                 setInternalId(hardware.internalId);
                 setManufacturer(hardware.manufacturer);
                 setModel(hardware.model);
                 setNote(hardware.note);
 
+                setTypesAsOptions(<input value={type} id="type" name="type" readOnly={true} className="capitalize text-gray-400 h-10 border mt-1 rounded px-4 w-full bg-gray-50" />);
+
+                // invisible input to complete request on backend
                 setInternalIdForm(<input type="text" value={internalId} readOnly={true} name="internalId" id="internalId" className="invisible h-0 w-0" />)
 
+                // because sometimes typescript gets funky
                 if (new Date(hardware.buyDate).getFullYear() !== 1970) setBuyDate(dateHtmlValue(hardware.buyDate));
                 if (new Date(hardware.endOfWarrantyDate).getFullYear() !== 1970) setEndOfWarrantyDate(dateHtmlValue(hardware.endOfWarrantyDate));
             }
@@ -71,12 +76,13 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
 
         let details: object
         if (newHardware)
-            details = {type, buyDate, serialNumber, manufacturer, model, endOfWarrantyDate, note};
+            details = {type: await formatHardwareType(document.cookie, type), buyDate, serialNumber, manufacturer, model, endOfWarrantyDate, note};
         else
-            details = {type, internalId, buyDate, serialNumber, manufacturer, model, endOfWarrantyDate, note};
+            details = {type: await formatHardwareType(document.cookie, type), internalId, buyDate, serialNumber, manufacturer, model, endOfWarrantyDate, note};
 
         //@ts-ignore
         const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
+        console.log(formBody)
 
         try {
             const response = await fetch(PUBLIC_BACKEND_URL + "/hmu", {
