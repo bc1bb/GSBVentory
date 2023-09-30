@@ -49,8 +49,8 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
                                             </div>
 
                                             <div className="md:col-span-5">
-                                                <label htmlFor="username">Username</label>
-                                                <input type="text" onChange={e=>setInternalId(e.target.value)} value={internalId} name="internalId" id="internalId" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                                <label htmlFor="username">Internal ID</label>
+                                                <input type="text" maxLength={2} onChange={e=>setInternalId(e.target.value)} value={internalId} name="internalId" id="internalId" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                                             </div>
 
                                             <div className="md:col-span-5">
