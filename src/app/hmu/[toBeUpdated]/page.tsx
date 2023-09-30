@@ -36,7 +36,7 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
                         content.push(<option value={hardwareType.name} className="capitalize">{hardwareType.name}</option>);
                     }
 
-                    setTypesAsOptions(<select id="type" name="type" className="capitalize h-10 border mt-1 rounded px-4 w-full bg-gray-50">{content}</select>);
+                    setTypesAsOptions(<select id="type" name="type" value={type} onChange={e=>setType(e.target.value)} className="capitalize h-10 border mt-1 rounded px-4 w-full bg-gray-50">{content}</select>);
                 }
             ).catch(console.error);
 
@@ -77,7 +77,6 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
 
         //@ts-ignore
         const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
-        console.log(formBody);
 
         try {
             const response = await fetch(PUBLIC_BACKEND_URL + "/hmu", {
