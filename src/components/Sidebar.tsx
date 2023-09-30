@@ -4,10 +4,12 @@ import fetchHardwareTypes from "@/scripts/fetchHardwareTypes";
 import checkLogin from "@/scripts/checkLogin";
 import fetchUser from "@/scripts/fetchUser";
 import Link from "next/link";
+import formatUserType from "@/objs/formatUserType";
 
 const Sidebar = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [userName, setUserName] = useState("");
+    const [userType, setUserType] = useState(0);
     const [hardwareLinks, setHardwareLinks] = useState(<div></div>);
     const [umuLinks, setUmuLinks] = useState(<div></div>);
 
@@ -23,6 +25,7 @@ const Sidebar = () => {
         fetchUser(document.cookie).then(
             (user: User) => {
                 setUserName(user.username);
+                setUserType(user.userType);
 
                 // If user is allowed to manage users
                 if (user.userType >= 2) {
@@ -101,6 +104,7 @@ const Sidebar = () => {
                     <div>
                         <p className="text-xs">
                             <strong className="block capitalize font-medium">{userName}</strong>
+                            <span className="block capitalize font-thin">{formatUserType(userType)}</span>
                         </p>
                     </div>
                 </div>
