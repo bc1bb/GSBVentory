@@ -11,6 +11,8 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [username, setUsername] = useState("");
     const [userType, setUserType] = useState(0);
+    const [password, setPassword] = useState("");
+
     const newUser = (params.toBeUpdated == "new");
 
     useEffect(() => {
@@ -29,13 +31,11 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
     const handleChangeType = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        setUserType(parseInt((document.getElementById("type") as HTMLInputElement).value, 10));
-        setUsername((document.getElementById("username") as HTMLInputElement).value);
-
         const formBody = `username=${username}&userType=${userType}`;
+        const method = newUser ? "POST" : "PATCH";
 
         const response = await fetch(PUBLIC_BACKEND_URL + "/umu", {
-            method: 'PATCH',
+            method: method,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                 'Authorization': getCookie("token", document.cookie)
@@ -44,6 +44,7 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
         });
 
         if (response.ok) {
+            if (newUser) document.location = `/umu/${username}`;
             document.location = "/umu";
         }
     }
@@ -82,44 +83,46 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
                                     <p className="font-medium text-lg">Editing user</p>
                                 </div>
 
-                                <form className="lg:col-span-2" onSubmit={handleChangeType}>
-                                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                        <div className="md:col-span-5">
-                                            <label htmlFor="username">Username</label>
-                                            <input type="text" disabled={!newUser} defaultValue={username} name="username" id="username" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
-                                        </div>
+                                <div className="lg:col-span-2">
+                                    <form onSubmit={handleChangeType}>
+                                        <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div className="md:col-span-5">
+                                                <label htmlFor="username">Username</label>
+                                                <input type="text" readOnly={!newUser} onChange={e=>setUsername(e.target.value)} value={username} name="username" id="username" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                            </div>
 
-                                        <div className="md:col-span-5">
-                                            <label htmlFor="type">Type</label>
-                                            <select id="type" name="type" value={userType} onChange={e=> setUserType(parseInt(e.target.value, 10))} className="capitalize h-10 border mt-1 rounded px-4 w-full bg-gray-50">
-                                                <option value={1} className="capitalize">{formatUserType(1)}</option>
-                                                <option value={2} className="capitalize">{formatUserType(2)}</option>
-                                                <option value={3} className="capitalize">{formatUserType(3)}</option>
-                                                <option value={4} className="capitalize">{formatUserType(4)}</option>
-                                            </select>
-                                        </div>
+                                            <div className="md:col-span-5">
+                                                <label htmlFor="type">Type</label>
+                                                <select id="type" name="type" value={userType} onChange={e=> setUserType(parseInt(e.target.value, 10))} className="capitalize h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                                    <option value={1} className="capitalize">{formatUserType(1)}</option>
+                                                    <option value={2} className="capitalize">{formatUserType(2)}</option>
+                                                    <option value={3} className="capitalize">{formatUserType(3)}</option>
+                                                    <option value={4} className="capitalize">{formatUserType(4)}</option>
+                                                </select>
+                                            </div>
 
-                                        <div className="md:col-span-5">
-                                            <input type="submit" name="submit" id="submit" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                            <div className="md:col-span-5">
+                                                <input type="submit" name="submit" id="submit" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </form>
+                                    </form>
 
-                                <hr />
+                                    <hr className="mt-2 ml-2 mr-2" />
 
-                                <form className="lg:col-span-2" onSubmit={handleChangePassword}>
-                                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                        <div className="md:col-span-3">
-                                            <label htmlFor="password">Password</label>
-                                            <input type="password" placeholder="******" name="password" id="password" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                    <form className="lg:col-span-2" onSubmit={handleChangePassword}>
+                                        <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div className="md:col-span-3">
+                                                <label htmlFor="password">Password</label>
+                                                <input type="password" placeholder="******" onChange={e=>setPassword(e.target.value)} name="password" id="password" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
+                                            </div>
+
+                                            <div className="md:col-span-2">
+                                                <label htmlFor="pwsubmit" className="opacity-0">send</label>
+                                                <input type="submit" name="pwsubmit" id="pwsubmit" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 resize-none" />
+                                            </div>
                                         </div>
-
-                                        <div className="md:col-span-2">
-                                            <label htmlFor="pwsubmit" className="opacity-0">send</label>
-                                            <input type="submit" name="pwsubmit" id="pwsubmit" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 resize-none" />
-                                        </div>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
