@@ -12,9 +12,7 @@ export default function Home() {
     let username = (document.getElementById("username") as HTMLInputElement).value;
     let password = (document.getElementById("password") as HTMLInputElement).value;
 
-    const details = {username, password};
-    //@ts-ignore
-    const formBody = Object.keys(details).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(details[key])).join('&');
+    const formBody = `username=${username}&password=${password}`;
 
     try {
       const response = await fetch(PUBLIC_BACKEND_URL + "/login", {

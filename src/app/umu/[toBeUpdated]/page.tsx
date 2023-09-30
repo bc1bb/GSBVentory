@@ -4,24 +4,71 @@ import Sidebar from "@/components/Sidebar";
 import React, {useEffect, useState} from "react";
 import formatUserType from "@/objs/formatUserType";
 import findUser from "@/scripts/findUser";
+import getCookie from "@/scripts/getCookie";
 
 const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
-    let [isLoaded, setIsLoaded] = useState(false);
-    const newUser = (params.toBeUpdated == "new");
-
+    const PUBLIC_BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+    const [isLoaded, setIsLoaded] = useState(false);
     const [username, setUsername] = useState("");
+    const [userType, setUserType] = useState(0);
+    const newUser = (params.toBeUpdated == "new");
 
     useEffect(() => {
         if (isLoaded) return; setIsLoaded(true);
-        if (newUser) return;
 
-        // From now on only new user
+        if (newUser) return;
+        // From now on only old user
         findUser(document.cookie, params.toBeUpdated).then(
             (user) => {
                 setUsername(user.username);
+                setUserType(user.userType);
             }
         ).catch(console.error);
-    }, []);
+    });
+
+    const handleChangeType = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        setUserType(parseInt((document.getElementById("type") as HTMLInputElement).value, 10));
+        setUsername((document.getElementById("username") as HTMLInputElement).value);
+
+        const formBody = `username=${username}&userType=${userType}`;
+
+        const response = await fetch(PUBLIC_BACKEND_URL + "/umu", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'Authorization': getCookie("token", document.cookie)
+            },
+            body: formBody,
+        });
+
+        if (response.ok) {
+            document.location = "/umu";
+        }
+    }
+
+    const handleChangePassword = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
+        setUsername((document.getElementById("username") as HTMLInputElement).value);
+        const password = (document.getElementById("password") as HTMLInputElement).value;
+
+        const formBody = `username=${username}&password=${password}`;
+
+        const response = await fetch(PUBLIC_BACKEND_URL + "/umu/password", {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'Authorization': getCookie("token", document.cookie)
+            },
+            body: formBody,
+        });
+
+        if (response.ok) {
+            document.location = "/umu";
+        }
+    }
 
     return (
         <div className="flex">
@@ -35,7 +82,7 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
                                     <p className="font-medium text-lg">Editing user</p>
                                 </div>
 
-                                <form className="lg:col-span-2">
+                                <form className="lg:col-span-2" onSubmit={handleChangeType}>
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                         <div className="md:col-span-5">
                                             <label htmlFor="username">Username</label>
@@ -44,7 +91,7 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
 
                                         <div className="md:col-span-5">
                                             <label htmlFor="type">Type</label>
-                                            <select id="type" name="type" className="capitalize h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                            <select id="type" name="type" value={userType} onChange={e=> setUserType(parseInt(e.target.value, 10))} className="capitalize h-10 border mt-1 rounded px-4 w-full bg-gray-50">
                                                 <option value={1} className="capitalize">{formatUserType(1)}</option>
                                                 <option value={2} className="capitalize">{formatUserType(2)}</option>
                                                 <option value={3} className="capitalize">{formatUserType(3)}</option>
@@ -53,14 +100,14 @@ const ToBeUpdated = ({params}: {params: { toBeUpdated: string }}) => {
                                         </div>
 
                                         <div className="md:col-span-5">
-                                            <input type="submit" name="submit" id="submit" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50 resize-none" />
+                                            <input type="submit" name="submit" id="submit" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" />
                                         </div>
                                     </div>
                                 </form>
 
                                 <hr />
 
-                                <form className="lg:col-span-2">
+                                <form className="lg:col-span-2" onSubmit={handleChangePassword}>
                                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                         <div className="md:col-span-3">
                                             <label htmlFor="password">Password</label>
